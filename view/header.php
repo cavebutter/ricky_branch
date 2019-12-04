@@ -6,4 +6,6 @@
     <link rel="stylesheet" href="master.css"/>
   </head>
   <body>
-  <p>This is a test to see if the header loads</p>
+  <nav>
+    <a href=".">Home (Pick League Team Year)</a>
+  </nav>
