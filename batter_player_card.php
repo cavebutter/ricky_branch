@@ -85,7 +85,7 @@
     <thead>
         Minor League Batting Stats
     </thead>
-    <th>Year</th><th>Age</th><th>Team</th><th>G</th><th>PA</th><th>AB</th>
+    <th>Year</th><th>Age</th><th>Team</th><th>Lg</th><th>G</th><th>PA</th><th>AB</th>
     <th>R</th><th>H</th><th>2B</th><th>3B</th><th>HR</th><th>RBI</th>
     <th>SB</th><th>CS</th><th>BB</th><th>SO</th><th>BBRate</th><th>KRate</th><th>BA</th><th>OBP</th>
     <th>OBP+</th><th>wOBA</th><th>SLG</th><th>ISO</th><th>OPS</th><th>WAR</th><th>wRAA</th><th>wRC</th><th>wRC+</th>
@@ -95,6 +95,7 @@
     <td><?php echo $player_year['year'] ?></td>
     <td><?php echo $player_year['age'] ?></td>
     <td><a href="index.php?action=get_roster&team_id=<?php echo $player_year['team_id'];?>&year=<?php echo $player_year['year'];?>"><?php echo $player_year['abbr'] ?></a></td>
+    <td><?php echo $player_year['league'] ?></td>
     <td><?php echo $player_year['g'] ?></td>
     <td><?php echo $player_year['PA'] ?></td>
     <td><?php echo $player_year['ab'] ?></td>
@@ -160,13 +161,14 @@
   <thead>
     Minor League Fielding Stats
   </thead>
-  <th>Year</th><th>Age</th><th>Team</th><th>Pos</th><th>G</th><th>GS</th>
+  <th>Year</th><th>Age</th><th>Team</th><th>Lg</th><th>Pos</th><th>G</th><th>GS</th>
   <th>IP</th><th>Opps</th><th>PO</th><th>A</th><th>E</th><th>DP</th><th>PCT</th><th>ZR</th>
   <?php foreach ($player_mil_f_stats as $player_year) : ?>
     <tr>
       <td><?php echo $player_year['year']; ?></td>
       <td><?php echo $player_year['age']; ?></td>
       <td><a href="index.php?action=get_roster&team_id=<?php echo $player_year['team_id'];?>&year=<?php echo $player_year['year'];?>"><?php echo $player_year['abbr'] ?></a></td>
+      <td><?php echo $player_year['league']; ?></td>
       <td><?php echo $player_year['pos_name']; ?></td>
       <td><?php echo $player_year['g']; ?></td>
       <td><?php echo $player_year['gs']; ?></td>

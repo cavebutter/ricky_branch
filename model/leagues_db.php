@@ -313,6 +313,7 @@ function get_player_ml_batting_stats($player_id) {
             , b.team_id
             , b.level_id
             , b.league_id
+            , l.abbr as league
             , b.g
             , b.ab
             , b.PA
@@ -352,6 +353,7 @@ function get_player_ml_batting_stats($player_id) {
             , t.abbr
             FROM CalcBatting b INNER JOIN players p ON b.player_id = p.player_id
             INNER JOIN teams t ON b.team_id = t.team_id
+            INNER JOIN leagues l ON b.league_id = l.league_id
             WHERE b.level_id = 1 AND b.player_id = :player_id
             ORDER BY b.year';
     $statement = $db->prepare($query);
@@ -370,6 +372,7 @@ function get_player_mil_batting_stats($player_id) {
             , b.team_id
             , b.level_id
             , b.league_id
+            , l.abbr as league
             , b.g
             , b.ab
             , b.PA
@@ -409,8 +412,9 @@ function get_player_mil_batting_stats($player_id) {
             , t.abbr
             FROM CalcBatting b INNER JOIN players p ON b.player_id = p.player_id
             INNER JOIN teams t ON b.team_id = t.team_id
+            INNER JOIN leagues l ON b.league_id = l.league_id
             WHERE b.level_id <> 1 AND b.player_id = :player_id
-            ORDER BY b.year, b.level_id';
+            ORDER BY b.year';
     $statement = $db->prepare($query);
     $statement->bindValue('player_id', $player_id);
     $statement->execute();
@@ -426,6 +430,7 @@ function get_ml_fielding_stats($player_id) {
             f.year - YEAR(p.date_of_birth) AS age,
             f.team_id,
             f.league_id,
+            l.abbr as league,
             f.level_id,
             f.split_id,
             po.pos_name,
@@ -467,6 +472,7 @@ function get_ml_fielding_stats($player_id) {
             f.player_id = p.player_id
             INNER JOIN teams t ON f.team_id = t.team_id
             INNER JOIN positions po ON f.position = po.position
+            INNER JOIN leagues l ON f.league_id = l.league_id
             WHERE f.level_id = 1 AND f.player_id = :player_id
             ORDER BY f.year, t.abbr, po.pos_name';
   $statement = $db->prepare($query);
@@ -484,6 +490,7 @@ function get_mil_fielding_stats($player_id) {
             f.year - YEAR(p.date_of_birth) AS age,
             f.team_id,
             f.league_id,
+            l.abbr as league,
             f.level_id,
             f.split_id,
             po.pos_name,
@@ -525,6 +532,7 @@ function get_mil_fielding_stats($player_id) {
             f.player_id = p.player_id
             INNER JOIN teams t ON f.team_id = t.team_id
             INNER JOIN positions po ON f.position = po.position
+            INNER JOIN leagues l ON b.league_id = l.league_id
             WHERE f.level_id <> 1 AND f.player_id = :player_id
             ORDER BY f.year, f.level_id, t.abbr, po.pos_name';
   $statement = $db->prepare($query);
@@ -540,6 +548,7 @@ function get_ml_pitching_stats($player_id) {
           , p.year
           , p.year - YEAR(pl.date_of_birth) AS age
           , p.level_id
+          , l.abbr as league
           , p.ab
           , p.tb
           , p.ha
@@ -607,6 +616,7 @@ function get_ml_pitching_stats($player_id) {
           , t.abbr
           FROM CalcPitching p INNER JOIN players pl ON p.player_id = pl.player_id
           INNER JOIN teams t ON p.team_id = t.team_id
+          INNER JOIN leagues l ON p.league_id = l.league_id
           WHERE p.level_id = 1 AND p.player_id = :player_id
           ORDER BY p.year';
   $statement=$db->prepare($query);
@@ -623,6 +633,7 @@ function get_mil_pitching_stats($player_id) {
           , p.year
           , p.year - YEAR(pl.date_of_birth) AS age
           , p.level_id
+          , l.abbr as league
           , p.ab
           , p.tb
           , p.ha
@@ -690,6 +701,7 @@ function get_mil_pitching_stats($player_id) {
           , t.abbr
           FROM CalcPitching p INNER JOIN players pl ON p.player_id = pl.player_id
           INNER JOIN teams t ON p.team_id = t.team_id
+          INNER JOIN leagues l ON p.league_id = l.league_id
           WHERE p.level_id <> 1 AND p.player_id = :player_id
           ORDER BY p.year, p.level_id, t.abbr';
   $statement=$db->prepare($query);

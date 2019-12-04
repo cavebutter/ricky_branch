@@ -100,7 +100,7 @@
   <thead>
     Minor League Pitching Stats (Traditional)
   </thead>
-  <th>Year</th><th>Age</th><th>Team</th><th>W</th><th>L</th><th>ERA</th><th>G</th><th>GS</th><th>CG</th><th>SHO</th>
+  <th>Year</th><th>Age</th><th>Team</th><th>Lg</th><th>W</th><th>L</th><th>ERA</th><th>G</th><th>GS</th><th>CG</th><th>SHO</th>
   <th>QS</th><th>SV</th><th>BS</th><th>IP</th><th>H</th><th>R</th><th>ER</th><th>HR</th><th>BB</th><th>SO</th><th>HBP</th>
   <th>BK</th><th>WP</th><th>BF</th>
   <?php foreach ($player_mil_p_stats as $player_year) : ?>
@@ -108,6 +108,7 @@
     <td><?php echo $player_year['year']; ?></td>
     <td><?php echo $player_year['age']; ?></td>
     <td><a href="index.php?action=get_roster&team_id=<?php echo $player_year['team_id'];?>&year=<?php echo $player_year['year'];?>"><?php echo $player_year['abbr'] ?></a></td>
+    <td><?php echo $player_year['league']; ?></td>
     <td><?php echo $player_year['w']; ?></td>
     <td><?php echo $player_year['l']; ?></td>
     <td><?php echo $player_year['ERA']; ?></td>
@@ -137,13 +138,14 @@
   <thead>
     Minor League Pitching Stats (Advanced)
   </thead>
-  <th>Year</th><th>Age</th><th>Team</th><th>WAR</th><th>K9</th><th>BB9</th><th>K/BB</th>
+  <th>Year</th><th>Age</th><th>Team</th><th>Lg</th><th>WAR</th><th>K9</th><th>BB9</th><th>K/BB</th>
   <th>HR9</th><th>WHIP</th><th>GB/FB</th><th>BABIP</th><th>FIP</th><th>xFIP</th><th>FIP-</th><th>ERA-</th><th>ERA+</th>
 <?php foreach ($player_mil_p_stats as $player_year): ?>
   <tr>
     <td><?php echo $player_year['year']; ?></td>
     <td><?php echo $player_year['age']; ?></td>
     <td><a href="index.php?action=get_roster&team_id=<?php echo $player_year['team_id'];?>&year=<?php echo $player_year['year'];?>"><?php echo $player_year['abbr'] ?></a></td>
+    <td><?php echo $player_year['league']; ?></td>
     <td><?php echo round($player_year['war'],1); ?></td>
     <td><?php echo $player_year['k9']; ?></td>
     <td><?php echo $player_year['bb9']; ?></td>

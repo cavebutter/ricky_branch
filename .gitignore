@@ -6,6 +6,7 @@ images
 __MACOSX
 to_process
 nbproject
+MySQL_OOTP_Scripts
 
 #Ignore all .PNG files
 .PNG
