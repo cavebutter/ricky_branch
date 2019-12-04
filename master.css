@@ -1,0 +1,141 @@
+html {
+  background: rgb(192,192,192);
+}
+
+body {
+  width: 90%;
+  padding-left: 1em;
+  padding-top: .5em;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  border: 1px solid black;
+}
+/*************************************
+Grids for Roster header
+**************************************/
+div.roster_head  {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    ". .  team_name team_name . ."
+    ". .  logo logo . ."
+    ". .  record record . ."
+    "b_ba b_war b_woba p_whip p_war p_fipm";
+}
+
+div.team_name {
+  grid-area: team_name;
+  color: green;
+
+}
+
+div.logo {
+  grid-area: logo;
+  justify-content: center;
+
+}
+
+div.record {
+  grid-area: record;
+
+}
+
+div.b_ba {
+  grid-area: b_ba;
+}
+
+div.b_war {
+  grid-area: b_war;
+}
+
+div.b_woba {
+  grid-area: b_woba;
+}
+
+div.p_whip {
+  grid-area: p_whip;
+}
+
+div.p_war {
+  grid-area: p_war;
+}
+
+div.p_fipm {
+  grid-area: p_fipm;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table .fixed_headers {
+  height: 100px;
+}
+
+.roster {
+  align-items: center;
+}
+/*******************
+Fixed Header Stuff
+********************
+.fixed_headers {
+  width: @table_width;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  th { text-decoration: underline; }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  thead {
+      background-color: @header_background_color;
+      color: @header_text_color;
+      tr {
+        display: block;
+        position: relative;
+      }
+    }
+    tbody {
+      display: block;
+      overflow: auto;
+      width: 100%;
+      height: @table_body_height;
+      tr:nth-child(even) {
+        background-color: @alternate_row_background_color;
+      }
+    }
+  }
+*******************************/
+
+ td  {
+  border: 1px solid gray;
+  text-align: center;
+  padding: 2px;
+  margin: auto;
+  }
+
+tr {
+  border: 1px solid gray:
+
+}
+tr:hover { background-color: #ddd;}
+
+ul {
+  padding-top: 1em;
+  padding-left: 1em;
+  list-style-type: none;
+  border: 1px solid black;
+}
+
+li {
+  padding-bottom: .75em;
+}
+
+form {
+  padding-left: 5em;
+  margin-left: 2em;
+}
