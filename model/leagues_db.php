@@ -834,27 +834,15 @@ function get_current_record($team_id) {
 
 function get_team_historical_record($team_id) {
   global $db;
-  $query = 'SELECT thr.team_id
-    , thr.year
-    , thr.g
-    , thr.w
-    , thr.l
-    , thr.pos
-    , round(thr.pct,3) as pct
-    , thr.gb
-#    , thr.streak
-#    , thr.magic_number
-#    , t.name
-#    , t.nickname
-#    , t.logo_file_name
-#    , l.abbr as league_abbr
-#    , s.name as sub_league_name
-#    , s.abbr as sub_league_abbr
-#    , d.name as div_name
-FROM team_history_record thr # INNER JOIN teams t ON thr.team_id = t.team_id
-#    INNER JOIN leagues l ON t.league_id = l.league_id
-#    INNER JOIN sub_leagues s ON t.league_id = s.league_id AND t.sub_league_id = s.sub_league_id
-#    INNER JOIN divisions d ON t.league_id = d.league_id AND t.sub_league_id = d.sub_league_id AND t.division_id = d.division_id
+  $query = 'SELECT thr.team_id            # [0]
+    , thr.year                            # [1]
+    , thr.g                               # [2]
+    , thr.w                               # [3]
+    , thr.l                               # [4]
+    , thr.pos                             # [5]
+    , round(thr.pct,3) as pct             # [6]
+    , thr.gb                              #[7]
+FROM team_history_record thr 
 WHERE thr.team_id = :team_id';
   $statement = $db->prepare($query);
   $statement->bindValue('team_id', $team_id);

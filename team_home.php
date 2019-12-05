@@ -19,7 +19,7 @@
     <td><?php echo $record['g']; ?></td>
     <td><?php echo $record['w']; ?></td>
     <td><?php echo $record['l']; ?></td>
-    <td><?php echo $record['pct']; ?></td>
+    <td><?php echo round(ltrim($record['pct'],"0"),3); ?></td>
     <td><?php echo $record['pos']; ?></td>
     <td><?php echo $record['gb']; ?></td>
     <td><?php echo $record['magic_number']; ?></td>
@@ -27,24 +27,25 @@
 <?php endforeach; ?>
 </table>
 <br><br>
-<table>
-  <caption>Historical Record</caption>
-  <thead>
-    <th>Year</th><th>G</th><th>W</th><th>L</th><th>PCT</th><th>GB</th>
-  </thead>
-  <?php foreach ($historical_record as $team_year) : ?>
 
-  <tr>
-    <td><?php echo $team_year['year']; ?></td>
-    <td><?php echo $team_year['g']; ?></td>
-    <td><?php echo $team_year['w']; ?></td>
-    <td><?php echo $team_year['l']; ?></td>
-    <td><?php echo ltrim(round($team_year['pct'],3),"0"); ?></td>
-    <td><?php echo $team_year['pos']; ?></td>
-    <td><?php echo $team_year['gb']; ?></td>
-  </tr>
+<?php  echo "<table><caption>Historical Record</caption><thead><th>Year</th><th>G</th><th>W</th><th>L</th><th>PCT</th><th>Pos</th><th>GB</th>
+      </thead>"; ?>
+<?php foreach ($team_historical_record as $year) {
+   echo "<tr>";
+    echo "<td><a href=\"index.php?action=get_roster&team_id="
+      .$year['team_id']."&year=".$year['year']."\">"
+    .$year['year']."</a></td>
+         <td>".$year['g']."</td>
+         <td>".$year['w']."</td>
+         <td>".$year['l']."</td>
+         <td>".ltrim($year['pct'],"0")."</td>
+         <td>".$year['pos']."</td>
+         <td>".$year['gb']."</td>";
+    echo "</tr>";
+  }
+  echo "</table>";
+  ?>
 
-<?php endforeach; ?>
-</table>
+
 
 <?php include 'view/footer.php'; ?>
