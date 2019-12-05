@@ -34,8 +34,10 @@ function get_current_year() {
   $query = 'SELECT max(year) FROM CalcBatting';
   $statement = $db->prepare($query);
   $statement->execute();
-  $current_year = $statement->fetch();
+  $return = $statement->fetch();
   $statement->closeCursor();
+  $current_year = $return[0];
+  return $current_year;
 }
 
 # Get a list of all years to populate a dropdown
@@ -132,20 +134,43 @@ function get_team_player_pitching_stats($year,$team_id) {
     $statement->closeCursor();
     return $pitchers;
 }
+# Get team record if current year
+function get_current_team_record($team_id){
+  global $db;
+  $query = 'SELECT team_id
+            , g
+            , w
+            , l
+            , pos
+            , round(pct,3) AS pct
+            , gb
+            FROM team_record
+            WHERE team_id = :team_id';
+  $statement = $db->prepare($query);
+  $statement->bindValue(':team_id', $team_id);
+  $statement->execute();
+  $team_record = $statement->fetchAll();
+  $statement->closeCursor();
+  return $team_record;
+}
 
-# Get team record data for the selected year
+# Get team record data for the selected year not current year
 function get_team_year_record($year, $team_id) {
     global $db;
-    $query = 'SELECT d.name as div_name, t.w, t.l, t.pos, t.pct, t.gb
-              FROM team_history_record t INNER JOIN divisions d ON
-              t.league_id = d.league_id AND t.sub_league_id = d.sub_league_id
-              AND t.division_id = d.division_id
+    $query = 'SELECT team_id
+              , g
+              , w
+              , l
+              , pos
+              , round(pct,3) AS pct
+              , gb
+              FROM team_history_record
               WHERE year = :year AND team_id = :team_id';
     $statement = $db->prepare($query);
     $statement->bindValue(':year', $year);
     $statement->bindValue(':team_id', $team_id);
     $statement->execute();
-    $team_record = $statement->fetch();
+    $team_record = $statement->fetchAll();
     $statement->closeCursor();
     return $team_record;
 }
@@ -771,31 +796,6 @@ function is_pitcher($player_id)  {
 THE FOLLOWING FUNCTIONS SUPPORT ACTION:
 team_home
 *******************************************/
-/*function get_team_info($team_id) {
-  global $db;
-  $query = 'SELECT t.team_id
-    , t.name
-    , t.nickname
-    , t.logo_file_name
-    , l.name as league
-    , l.abbr as league_abbr
-    , s.name as sub_league_name
-    , s.abbr as sub_league_abbr
-    , d.name as div_name
-    FROM teams t INNER JOIN leagues l ON t.league_id = l.league_id
-    INNER JOIN sub_leagues s ON t.league_id = s.league_id AND t.sub_league_id = s.sub_league_id
-    INNER JOIN divisions d ON t.league_id = d.league_id AND t.sub_league_id = d.sub_league_id
-    AND t.division_id = d.division_id
-    WHERE d.team_id = :team_id';
-  $statement = $db->prepare($query);
-  $statement ->bindValue('team_id', $team_id);
-  $statement->execute();
-  $team_info = $statement->fetchAll();
-  $statement->closeCursor();
-  return $team_info;
-}
-*/
-
 function get_team_info($team_id) {
   global $db;
   $query = 'SELECT t.team_id
@@ -841,8 +841,8 @@ function get_team_historical_record($team_id) {
     , thr.l                               # [4]
     , thr.pos                             # [5]
     , round(thr.pct,3) as pct             # [6]
-    , thr.gb                              #[7]
-FROM team_history_record thr 
+    , thr.gb                              # [7]
+FROM team_history_record thr
 WHERE thr.team_id = :team_id';
   $statement = $db->prepare($query);
   $statement->bindValue('team_id', $team_id);

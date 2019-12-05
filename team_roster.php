@@ -14,15 +14,18 @@
   <div class="record">
     <table>
       <thead>
-      <?php echo $caption; ?>
+
       </thead>
-      <th>W</th><th>L</th><th>PCT</th><th>GB</th>
+      <th>W</th><th>L</th><th>PCT</th>,<th>POS</th><th>GB</th>
+      <?php foreach ($team_record as $item) : ?>
       <tr>
-        <td><?php echo $team_record['w']; ?></td>
-        <td><?php echo $team_record['l']; ?></td>
-        <td><?php echo ltrim(round($team_record['pct'],3),"0"); ?></td>
-        <td><?php echo $team_record['gb']; ?></td>
+        <td><?php echo $item['w']; ?></td>
+        <td><?php echo $item['l']; ?></td>
+        <td><?php echo ltrim(round($item['pct'],3),"0"); ?></td>
+        <td><?php echo $item['pos']; ?></td>
+        <td><?php echo $item['gb']; ?></td>
       </tr>
+    <?php endforeach; ?>
       </table>
   </div>
   <div class="b_ba">

@@ -36,14 +36,20 @@ if ($action == 'get_roster') {
     $error_message = "Please make sure that you select a team from the dropdown.";
     include('errors/other_error.php');
   }
+  $current_year = get_current_year();
+  if ($year !== $current_year) {  // if selected year not current year, pull record from team_history_record
+    $team_record = get_team_year_record($year, $team_id);
+  } else {  // if selected year is current year, pull record from team_record
+    $team_record = get_current_team_record($team_id);
+  }
   $batters = get_team_player_batting_stats($year,$team_id);
   $pitchers = get_team_player_pitching_stats($year,$team_id);
   $logo_filename = get_team_logo($team_id);
   $team_logo_path = 'images/team_logos/'.$logo_filename['logo_file_name'];
   $team_name = get_team_name($team_id);
   $combined_name = $team_name['city'].' '.$team_name['nickname'];
-  $team_record = get_team_year_record($year, $team_id);
-  $caption = 'Finished #'.$team_record['pos'].' In '.$team_record['div_name'];
+
+  #$caption = 'Finished #'.$team_record['pos'].' In '.$team_record['div_name'];
   $team_ba_leaders = get_team_ba_leaders($year,$team_id);
   $team_war_leaders = get_team_war_leaders($year,$team_id);
   $team_woba_leaders = get_team_woba_leaders($year,$team_id);
