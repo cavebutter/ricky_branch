@@ -843,7 +843,18 @@ function get_team_historical_record($team_id) {
     , round(thr.pct,3) as pct             # [6]
     , thr.gb                              # [7]
 FROM team_history_record thr
-WHERE thr.team_id = :team_id';
+WHERE thr.team_id = :team_id
+UNION
+SELECT team_id
+      , "Current" as year
+      , g
+      , w
+      , l
+      , pos
+      , round(pct,3)
+      , gb
+      FROM team_record
+      WHERE team_id = :team_id';
   $statement = $db->prepare($query);
   $statement->bindValue('team_id', $team_id);
   $statement->execute();
