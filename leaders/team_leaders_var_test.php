@@ -1,4 +1,5 @@
 <html>
+<h2>This is the Testing Section</h2>
 <h3>Function Calls</h3>
 <p>$leagues = <?php var_export($leagues);
  ?></p>
@@ -10,11 +11,11 @@
  <h3>Passed Values</h3>
  <p>$action = <?php var_export($action); ?></p>
 
-  <p>$action = <?php var_export($team_id); ?></p>
+  <p>$team_id = <?php var_export($team_id); ?></p>
 
-   <p>$action = <?php var_export($stat); ?></p>
+   <p>$stat = <?php var_export($stat); ?></p>
 
-    <p>$action = <?php var_export($league); ?></p>
+    <p>$league = <?php var_export($league); ?></p>
 
-     <p>$action = <?php var_export($stat); ?></p>
+     
 </html>
