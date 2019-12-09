@@ -48,8 +48,8 @@ namespace leaders {
   }
 
   function b_stat_names() {
-    $b_stat_names = array (G, AB, R, H, 2B, 3B, HR, RBI, BB, SO, SB, CS, Avg, OBP, TB, SLG, OPS,
-                            HBP, IBB, SAC, SF, PA)
+    $b_stat_names = ['G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'Avg', 'OBP', 'TB', 'SLG', 'OPS',
+                            'HBP', 'IBB', 'SAC', 'SF', 'PA'];
     return $b_stat_names;
   }
 }

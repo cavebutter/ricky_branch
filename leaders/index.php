@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 require('../model/database.php');
 require('../model/leagues_db.php');
@@ -22,6 +22,7 @@ if ($action == team) {
   $teams = get_teams($league);
   $b_stat_names = b_stat_names();
   include('team_leaders.php');
+  include('team_leaders_var_test.php');
 }
 
- ?>
+
