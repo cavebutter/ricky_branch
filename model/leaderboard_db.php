@@ -33,14 +33,14 @@ namespace leaders {
    , sum(b.PA) as PA
     FROM CalcBatting b INNER JOIN players p ON b.player_id = p.player_id
         INNER JOIN positions pos ON p.position = pos.position
-    WHERE b.team_id = :team_id AND p.position <>1
+    WHERE b.team_id = :team_id AND  p.position <>1
     GROUP BY b.player_id, Player, POS
     ORDER BY :stat DESC
     LIMIT 50';
 
     $statement = $db->prepare($query);
-    $statement->bindValue(':team_id', $team_id);
-    $statement->bindValue(':stat', $stat);
+    $statement->bindValue('team_id', $team_id);
+    $statement->bindValue('stat', $stat);
     $statement->execute();
     $team_all_time_b_leaders = $statement->fetchAll();
     $statement->closeCursor();

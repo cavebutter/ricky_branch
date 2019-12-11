@@ -7,9 +7,9 @@
 <label for="league_id">Select League:</label>
   <select class="" name="league_id">
       <option selected disabled>Choose League</option>
-    <?php foreach ($leagues as $league) : ?>
-      <option value="<?php echo $league['league_id']; ?>">
-      <?php echo $league['name']; ?></option>
+    <?php foreach ($leagues as $item) : ?>
+      <option value="<?php echo $item['league_id']; ?>">
+      <?php echo $item['name']; ?></option>
     <?php endforeach; ?>
   </select>
 <input type="submit" value="Select League">

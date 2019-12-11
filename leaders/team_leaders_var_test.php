@@ -8,6 +8,8 @@
 
  <p>$b_stat_names = <?php var_export($b_stat_names); ?></p>
 
+ <p>$team_all_time_b_leaders = <?php var_export($team_all_time_b_leaders); ?></p>
+
  <h3>Passed Values</h3>
  <p>$action = <?php var_export($action); ?></p>
 
@@ -17,5 +19,5 @@
 
     <p>$league = <?php var_export($league); ?></p>
 
-     
+
 </html>

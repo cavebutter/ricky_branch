@@ -14,18 +14,18 @@
     if ($league === NULL || $league === FALSE) {
      $league = 0;
     }
-    if ($stat == NULL || $stat == FALSE) {
-      $stat = "Avg";
+    if ($stat === NULL || $stat === FALSE) {
+      $stat = 'Avg';
     }
-    if (isset($team_id)) {
-      $team_all_time_b_leaders = team_all_time_b_leaders($team_id, $stat);
-    }
+    #if (isset($team_id)) {
+    #  $team_all_time_b_leaders = team_all_time_b_leaders($team_id, $stat);
+    #}
   }
     $leagues = get_leagues();
     $teams = get_teams($league);
     $b_stat_names = ['G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'Avg', 'OBP', 'TB', 'SLG', 'OPS',
                             'HBP', 'IBB', 'SAC', 'SF', 'PA']; # Should I make this a function?
-
+    $team_all_time_b_leaders = team_all_time_b_leaders(28, 'AB');
   include('team_leaders.php');
   include('team_leaders_var_test.php');
  ?>
